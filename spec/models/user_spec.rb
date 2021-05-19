@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
   it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_length_of(:name) }
 
@@ -29,6 +28,4 @@ RSpec.describe User, type: :model do
     user = User.reflect_on_association(:pending_frienships)
     expect(user.macro).to eq(:has_many)
   end
-
-  
 end
