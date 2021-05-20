@@ -1,27 +1,14 @@
 env:
   RUBY_VERSION: 2.7.0
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
-  POSTGRES_DB: postgres
+  POSTGRES_USER: hackase_dev
+  POSTGRES_PASSWORD: hakasepass
+  POSTGRES_DB: ror_social_scaffold_test
 
 name: Rails tests
 on: [push,pull_request]
 jobs:
-  rubocop-test:
-    name: Rubocop
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-      - name: Install Rubocop
-        run: gem install rubocop
-      - name: Check code
-        run: rubocop
   rspec-test:
     name: RSpec
-    needs: rubocop-test
     runs-on: ubuntu-18.04
     services:
       postgres:
@@ -33,7 +20,7 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
       - name: Install postgres client
