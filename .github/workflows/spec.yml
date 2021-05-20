@@ -1,8 +1,8 @@
 env:
   RUBY_VERSION: 2.7.0
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
-  POSTGRES_DB: postgres
+  POSTGRES_USER: hakase_dev
+  POSTGRES_PASSWORD: hakasepass
+  POSTGRES_DB: or_social_scaffold_
 
 name: Rails tests
 on: pull_request
