@@ -1,11 +1,11 @@
 env:
   RUBY_VERSION: 2.7.0
-  POSTGRES_USER: hackase_dev
-  POSTGRES_PASSWORD: hakasepass
-  POSTGRES_DB: ror_social_scaffold_test
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_DB: postgres
 
 name: Rails tests
-on: [push,pull_request]
+on: pull_request
 jobs:
   rspec-test:
     name: RSpec
