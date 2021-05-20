@@ -1,9 +1,25 @@
 class Friendship < ApplicationRecord
   belongs_to :user
 
+  def self.record(id1, id2)
+    case1 = Friendship.where(user_id: id1, friend_id: id2)
+    case2 = Friendship.where(user_id: id2, friend_id: id1)
+    unless case1.empty?
+      case1
+    else
+      case2
+    end
+  end
+
   def self.reacted?(id1, id2)
     case1 = !Friendship.where(user_id: id1, friend_id: id2).empty?
     case2 = !Friendship.where(user_id: id2, friend_id: id1).empty?
+    case1 || case2
+  end
+
+  def self.requested(id1, id2)
+    case1 = !Friendship.where(user_id: id1, friend_id: id2, confirmed: false).empty?
+    case2 = !Friendship.where(user_id: id2, friend_id: id1, confirmed: false).empty?
     case1 || case2
   end
 

@@ -19,11 +19,16 @@ class User < ApplicationRecord
     User.where(id: ids)
   end
 
+  def friendship_requests
+    friendships_got_invited = Friendship.where(friend_id: id, confirmed: false).pluck(:user_id)
+    User.where(id: friendships_got_invited)
+  end
+
   def friend_with?(user)
     Friendship.confirmed_record?(id, user.id)
   end
 
-  def send_invitation(user)
-    Friendship.create(friend_id: user.id)
+  def friend_request_sent_to(user)
+    Friendship.requested(id, user.id)
   end
 end

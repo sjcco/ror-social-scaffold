@@ -1,0 +1,14 @@
+<% if current_user.friendship_requests.empty? %>
+  <h3 class="display-8">No new requests</h3>
+
+<% else %>
+<% current_user.friendship_requests.each do |friend_request| %>
+
+  <div class="input-group mb-3">
+    <label class="input-group-text form-control"><%= friend_request.name %></label>
+    <%= link_to accept_friend_request_path(friend_request) do %>
+      <button class="btn btn-primary" type="button" id="button-addon2">accept</button>
+    <% end %>
+  </div>
+<% end %>
+<% end %>
