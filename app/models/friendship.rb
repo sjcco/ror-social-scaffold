@@ -2,12 +2,12 @@ class Friendship < ApplicationRecord
   belongs_to :user
 
   def self.record(id1, id2)
-    case1 = Friendship.where(user_id: id1, friend_id: id2)
-    case2 = Friendship.where(user_id: id2, friend_id: id1)
-    unless case1.empty?
-      case1
+    case1 = Friendship.where(user_id: id1, friend_id: id2).all
+    case2 = Friendship.where(user_id: id2, friend_id: id1).all
+    if case1.empty?
+      case2.first
     else
-      case2
+      case1.first
     end
   end
 

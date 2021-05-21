@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'send_friend_request' => 'friendships#create', as: 'send_friend_request'
   get 'accept_friend_request' => 'friendships#update', as: 'accept_friend_request'
+  get 'destroy_friendship' => 'friendships#destroy', as: 'destroy_friendship'
 
   devise_for :users
 

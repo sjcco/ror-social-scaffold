@@ -10,11 +10,15 @@
   </div>
 </div>
 <div class="col-2">
-<% unless @button_class.nil? %>
-  <%= link_to @route do %> 
-    <%= button_tag @button_message, type: 'button', class: @button_class %>
+  <% unless @show_hash[:button_class].nil? %>
+    <%= link_to @show_hash[:route] do %> 
+      <%= button_tag @show_hash[:button_message], type: 'button', class: @show_hash[:button_class] %>
+    <% end %>
   <% end %>
-<% end %>
-
+  <% if @show_decline %>
+  <%= link_to destroy_friendship_path(@friendship) do %> 
+      <%= button_tag 'Decline', type: 'button', class: 'btn btn-danger btn-lg' %>
+    <% end %>
+  <% end %>
 </div>
 </div>
