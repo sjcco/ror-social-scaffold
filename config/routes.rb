@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'accept_friend_request' => 'friendships#update', as: 'accept_friend_request'
   get 'destroy_friendship' => 'friendships#destroy', as: 'destroy_friendship'
 
-  devise_for :users
+  devise_for :users, :controllers => { sessions: 'users/sessions' }
 
   resources :users, only: [:index, :show]
   resources :posts, only: [:index, :create] do

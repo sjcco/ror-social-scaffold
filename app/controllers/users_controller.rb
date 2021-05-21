@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:index, :show]
 
   def index
     @users = User.all
@@ -9,6 +9,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.ordered_by_most_recent
+    select_button
+  end
+  # rubocop:enable Metrics/MethodLength, Style/GuardClause
+
+  def select_button
     unless helpers.owner?(@user)
       if Friendship.reacted?(current_user.id, params[:id])
         @friendship = Friendship.record(current_user.id, params[:id])
@@ -29,6 +34,6 @@ class UsersController < ApplicationController
                        button_class: 'btn btn-primary btn-lg' }
       end
     end
+    @show_hash
   end
-  # rubocop:enable Metrics/MethodLength, Style/GuardClause
 end
