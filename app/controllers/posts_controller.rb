@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     timeline_posts
-    flash[:notice] = current_user.id
   end
 
   def create
