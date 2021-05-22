@@ -14,8 +14,9 @@ class FriendshipsController < ApplicationController
 
   def destroy
     friendship_delete = Friendship.find(params[:format])
-    friendship_pair = Friendship.where("user_id = ? AND friend_id = ?", friendship_delete.friend_id, friendship_delete.user_id).first
-    friendship_pair.destroy unless friendship_pair.nil?
+    friendship_pair = Friendship.where('user_id = ? AND friend_id = ?', friendship_delete.friend_id,
+                                       friendship_delete.user_id).first
+    friendship_pair&.destroy
     friendship_delete.destroy
     redirect_back(fallback_location: root_path)
   end

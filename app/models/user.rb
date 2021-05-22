@@ -23,7 +23,7 @@ class User < ApplicationRecord
   end
 
   def friend_with?(user)
-    Friendship.where("user_id = ? AND friend_id = ? AND confirmed = ?", id, user.id, true).first
+    Friendship.where('user_id = ? AND friend_id = ? AND confirmed = ?', id, user.id, true).first
   end
 
   def friend_request_sent_to(user)
