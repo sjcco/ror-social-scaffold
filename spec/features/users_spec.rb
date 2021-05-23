@@ -28,16 +28,15 @@ RSpec.feature 'Users', type: :feature do
   end
 
   context 'log in and log out as existing user' do
-    
     scenario 'Should be successsful' do
-      u1 = create(:user, email: 'login@test.com')
+      create(:user, email: 'login@test.com')
       visit user_session_path
       within('form') do
         fill_in 'Email', with: 'login@test.com'
         fill_in 'Password', with: '12345678'
       end
       click_button 'Log in'
-      expect(page).to have_content("Signed in successfully.")
+      expect(page).to have_content('Signed in successfully.')
     end
     scenario 'Should not be successsful' do
       visit user_session_path
