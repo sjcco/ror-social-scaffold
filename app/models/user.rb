@@ -13,9 +13,7 @@ class User < ApplicationRecord
   has_many :pending_frienships, -> { where confirmed: false }, class_name: 'Friendship', foreign_key: 'friend_id'
 
   def friends
-    friendships_i_requested = Friendship.where(user_id: id, confirmed: true).pluck(:friend_id)
-    friendships_got_invited = Friendship.where(friend_id: id, confirmed: true).pluck(:user_id)
-    ids = friendships_i_requested + friendships_got_invited
+    ids = Friendship.where(user_id: id, confirmed: true).pluck(:friend_id)
     User.where(id: ids)
   end
 
@@ -25,7 +23,7 @@ class User < ApplicationRecord
   end
 
   def friend_with?(user)
-    Friendship.confirmed_record?(id, user.id)
+    Friendship.where('user_id = ? AND friend_id = ? AND confirmed = ?', id, user.id, true).first
   end
 
   def friend_request_sent_to(user)
