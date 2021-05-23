@@ -1,6 +1,16 @@
-<li>
-  Name: <%= user.name %>
-  <span class="profile-link">
-    <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
-  </span>
-</li>
+
+
+  <% unless user == current_user %>
+  <li>
+    <div class="input-group">
+  
+      <label class="input-group-text form-control"> <%= link_to user_path(user) do %><%= user.name %><% end %></label>
+    
+      <% unless Friendship.reacted?(current_user.id, user.id) %>
+      <%= link_to send_friend_request_path(user) do %>
+        <button class="btn btn-primary" type="button" id="button-addon2">send request</button>
+      <% end %>
+      <% end %>
+    </div>
+  </li>
+  <% end %>
